@@ -56,35 +56,47 @@ while (isContinue)
         case "categories":
             Console.WriteLine("Insert Data in one row in format: [name]");
             var dataCategoryRow = Console.ReadLine();
-            //TODO: Check valid format;
-            dataCategoryRow = dataCategoryRow.Substring(1, dataCategoryRow.Length - 1);
-            var rowCategoryValues = dataCategoryRow.Split(',');
-            var category = new Category
+            try
             {
-                Name = rowCategoryValues[0]
-            };
+                dataCategoryRow = dataCategoryRow.Substring(1, dataCategoryRow.Length - 1);
+                var rowCategoryValues = dataCategoryRow.Split(',');
+                var category = new Category
+                {
+                    Name = rowCategoryValues[0]
+                };
 
-            fillDbManager.CategoryRepository.AddRecord(category);
-            dbCategories.Add(category);
+                fillDbManager.CategoryRepository.AddRecord(category);
+                dbCategories.Add(category);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Problem with adding values to table. Error message: {ex.Message}");
+            }
             break;
         case "advertisements":
             Console.WriteLine("Insert Data in one row in format: [name, description, user_id, user_last_name, user_first_name, category_id, category_name]");
             var dataAdvRow = Console.ReadLine();
-            //TODO: Check valid format;
-            dataAdvRow = dataAdvRow.Substring(1, dataAdvRow.Length - 1);
-            var rowAdvValues = dataAdvRow.Split(',');
-            var advertisement = new Advertisement
+            try
             {
-                Name = rowAdvValues[0],
-                Description = rowAdvValues[1],
-                UserId = Convert.ToInt32(rowAdvValues[2]),
-                User = new User { LastName = rowAdvValues[3], FirstName = rowAdvValues[4] },
-                CategoryId = Convert.ToInt32(rowAdvValues[5]),
-                Category = new Category { Id = Convert.ToInt32(rowAdvValues[5]), Name = rowAdvValues[6] }
-            };
+                dataAdvRow = dataAdvRow.Substring(1, dataAdvRow.Length - 1);
+                var rowAdvValues = dataAdvRow.Split(',');
+                var advertisement = new Advertisement
+                {
+                    Name = rowAdvValues[0],
+                    Description = rowAdvValues[1],
+                    UserId = Convert.ToInt32(rowAdvValues[2]),
+                    User = new User { LastName = rowAdvValues[3], FirstName = rowAdvValues[4] },
+                    CategoryId = Convert.ToInt32(rowAdvValues[5]),
+                    Category = new Category { Id = Convert.ToInt32(rowAdvValues[5]), Name = rowAdvValues[6] }
+                };
 
-            fillDbManager.AdvertisementRepository.AddRecord(advertisement);
-            dbAdvertisements.Add(advertisement);
+                fillDbManager.AdvertisementRepository.AddRecord(advertisement);
+                dbAdvertisements.Add(advertisement);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Problem with adding values to table. Error message: {ex.Message}");
+            }
             break;
         case "exit":
             isContinue = false;
