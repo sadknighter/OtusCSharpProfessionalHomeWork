@@ -30,20 +30,28 @@ while (isContinue)
         case "users":
             Console.WriteLine("Insert Data in one row in format: [first_name, last_name, middle_name, email, telephone]");
             var dataUserRow = Console.ReadLine();
-            //TODO: Check valid format;
-            dataUserRow = dataUserRow.Substring(1, dataUserRow.Length - 1);
-            var rowUserValues = dataUserRow.Split(',');
-            var user = new User
+            try
             {
-                FirstName = rowUserValues[0],
-                LastName = rowUserValues[1],
-                MiddleName = rowUserValues[2],
-                Email = rowUserValues[3],
-                Telephone = rowUserValues[4],
-            };
+                dataUserRow = dataUserRow.Substring(1, dataUserRow.Length - 1);
+                var rowUserValues = dataUserRow.Split(',');
+                var user = new User
+                {
+                    FirstName = rowUserValues[0],
+                    LastName = rowUserValues[1],
+                    MiddleName = rowUserValues[2],
+                    Email = rowUserValues[3],
+                    Telephone = rowUserValues[4],
+                };
 
-            fillDbManager.UserRepository.AddRecord(user);
-            dbUsers.Add(user);
+                fillDbManager.UserRepository.AddRecord(user);
+                dbUsers.Add(user);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Problem with adding values to table. Error message: {ex.Message}");
+            }
+
+
             break;
         case "categories":
             Console.WriteLine("Insert Data in one row in format: [name]");
