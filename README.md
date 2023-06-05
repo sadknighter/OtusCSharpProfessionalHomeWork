@@ -1,5 +1,5 @@
 # OtusCSharpProfessionalHomeWork
-Repository with homework(branches) of Otus Course C# Developer. Professional
+Repository with homework(branches) of Otus Course C# Developer Professional.
 Homework with database.
 ## Goal:
 - Create PostgreSQL DB.
